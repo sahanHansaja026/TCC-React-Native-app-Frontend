@@ -1,0 +1,55 @@
+{
+  "expo": {
+    "name": "EasyPark",
+    "slug": "mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/logoimage.png",
+    "scheme": "mobile",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.sahanhansaja.mobile",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyAVmMIB8jcl1PgbGA4IDy3u0qv_8UPIo2w"
+        }
+      },
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/logoimage.png",
+        "backgroundColor": "#FFFD78"
+      },
+      "edgeToEdgeEnabled": true
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/images/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/splash-icon.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#ffffff"
+        }
+      ],
+      "expo-maps"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "e3c9946e-2e6d-4c4b-86d0-ffb7ff2971ad"
+      }
+    }
+  }
+}
