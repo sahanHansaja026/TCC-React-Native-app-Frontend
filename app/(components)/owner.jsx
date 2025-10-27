@@ -1,6 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
 import { useRouter } from "expo-router";
+import React, { useEffect, useRef, useState } from "react";
 import { FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import API_BASE_URL from '../../config/ipconfig';
+import axios from "axios";
 
 const IMAGES = [
     require("../../assets/images/slot1.jpg"),
@@ -8,8 +10,14 @@ const IMAGES = [
     require("../../assets/images/slot3.png"),
 ];
 
+import { useLocalSearchParams } from 'expo-router';
+
+
 export default function Owner() {
+    const { id } = useLocalSearchParams();
     const router = useRouter();
+
+    const [lot, setLot] = useState(null);
 
     const [slots, setSlots] = useState([
         { id: 1, occupied: false },
@@ -19,7 +27,6 @@ export default function Owner() {
         { id: 5, occupied: false },
         { id: 6, occupied: false },
     ]);
-
     const flatListRef = useRef(null);
     const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -33,7 +40,14 @@ export default function Owner() {
 
         return () => clearInterval(interval);
     }, [currentIndex]);
+    useEffect(() => {
+        // Fetch parking lot details from backend
+        axios.get(`${API_BASE_URL}/get_parking_location/${id}`)
+            .then(response => setLot(response.data))
+            .catch(error => console.log(error));
+    }, [id]);
 
+    if (!lot) return <Text>Loading...</Text>;
     return (
         <ScrollView style={styles.container}>
             {/* Auto-scrolling Image Gallery */}
@@ -49,11 +63,10 @@ export default function Owner() {
                 )}
                 style={{ marginVertical: 15 }}
             />
-
             {/* Parking Info Card */}
             <View style={styles.infoCard}>
-                <Text style={styles.infoTitle}>SLTC Parking Lot</Text>
-                <Text style={styles.infoText}>📍 Location: Central Parking, Downtown</Text>
+                <Text style={styles.infoTitle}>{lot.lotname}</Text>
+                <Text style={styles.infoText}>📍 Location: {lot.location}</Text>
                 <Text style={styles.infoText}>🅿️ Total Slots: {slots.length}</Text>
                 <Text style={styles.infoText}>
                     ✅ Available Slots: {slots.filter((s) => !s.occupied).length}

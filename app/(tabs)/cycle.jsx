@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator } from 'react-native';
-import { WebView } from 'react-native-webview';
-import { useRouter } from "expo-router";
 import axios from "axios";
+import { useRouter } from "expo-router";
+import React, { useEffect, useState } from 'react';
+import { ActivityIndicator, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { WebView } from 'react-native-webview';
 import API_BASE_URL from '../../config/ipconfig';
 
 export default function Appcycle() {
@@ -88,7 +88,10 @@ export default function Appcycle() {
         console.log("Selected parking lot:", data.lotName, data.lotId);
 
         // ✅ Use router.push, not <Link>
-        router.push(`/(components)/owner?parkinglotid=${data.lotId}&lotName=${encodeURIComponent(data.lotName)}`);
+        router.push({
+          pathname: "/(components)/owner",
+          params: { id: data.lotId },
+        });
       }
     } catch (err) {
       console.error("Invalid message:", err);
