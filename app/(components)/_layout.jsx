@@ -54,6 +54,19 @@ export default function Componentlayout() {
                 }}
             />
             <Stack.Screen
+                name="caredit"
+                options={{
+                    title: "Your Vehicle Information",
+                    header: ({ navigation, options }) => (
+                        <CustomHeader
+                            title={options.title}
+                            subtitle="Here’s everything we know about this vehicle"
+                            onBack={navigation.goBack}
+                        />
+                    ),
+                }}
+            />
+            <Stack.Screen
                 name="help"
                 options={{
                     title: "Help And Support",

@@ -65,19 +65,29 @@ export default function Carselect({ navigation }) {
           data={vehicles}
           keyExtractor={(item, index) => item.id?.toString() || index.toString()}
           renderItem={({ item }) => (
-            <View style={styles.vehicleCard}>
-              <View style={styles.caritems}>
-                <Image source={CarIconIcon} style={styles.addIcon} />
-                <View style={styles.cartext}>
-                  <Text style={styles.normaltextbold}>{item.model}</Text>
-                  <Text style={styles.normaltext}>{item.licenseplate}</Text>
+            <TouchableOpacity
+              onPress={() =>
+                router.push({
+                  pathname: "/(components)/caredit",
+                  params: { id: item.id }, // Use item.lotId instead of data.lotId if needed
+                })
+              }
+            >
+              <View style={styles.vehicleCard}>
+                <View style={styles.caritems}>
+                  <Image source={CarIconIcon} style={styles.addIcon} />
+                  <View style={styles.cartext}>
+                    <Text style={styles.normaltextbold}>{item.model}</Text>
+                    <Text style={styles.normaltext}>{item.licenseplate}</Text>
+                  </View>
                 </View>
               </View>
-            </View>
+            </TouchableOpacity>
           )}
           contentContainerStyle={{ padding: 16, paddingBottom: 120, marginTop: 170 }}
           showsVerticalScrollIndicator={false}
         />
+
 
         {/* Add Vehicle Button fixed at bottom */}
         <TouchableOpacity
