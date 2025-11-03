@@ -53,6 +53,21 @@ export default function Componentlayout() {
                     ),
                 }}
             />
+
+            <Stack.Screen
+                name="profile"
+                options={{
+                    title: "My Profile",
+                    header: ({ navigation, options }) => (
+                        <CustomHeader
+                            title={options.title}
+                            subtitle="Set up your profile so we can tailor the app experience just for you"
+                            onBack={navigation.goBack}
+                        />
+                    ),
+                }}
+            />
+
             <Stack.Screen
                 name="caredit"
                 options={{
