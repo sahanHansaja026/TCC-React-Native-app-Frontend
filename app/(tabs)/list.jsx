@@ -8,7 +8,7 @@ import CompletedScreen from "../screens/CompletedScreen";
 import CancelledScreen from "../screens/CancelledScreen";
 
 export default function BookingTabs() {
-  const [activeTab, setActiveTab] = useState("Completed");
+  const [activeTab, setActiveTab] = useState("Ongoing");
 
   const tabs = ["Ongoing", "Completed", "Cancelled"];
 
